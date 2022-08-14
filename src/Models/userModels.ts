@@ -35,7 +35,7 @@ return bcrypt.compare(candidatePassword, user.password).catch((e)=>console.log(e
 userSchema.pre('save', async function(){
     const user = this as UserDocument;
     if(!user.isModified('password')) return;
-    const salt = await bcrypt.genSalt(config.get("saltWorkFactor"))
+    const salt = await bcrypt.genSalt(config.get("saltWorkfactor"))
     const hash = await bcrypt.hashSync(user.password, salt)
     user.password = hash;
     return ;
